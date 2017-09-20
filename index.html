@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+128+Text|Orbitron" rel="stylesheet">
   <!-- end googlefonts -->
   <link rel="stylesheet" href="./assets/css/style.css">
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
 </head>
 
 <body>
@@ -28,13 +30,13 @@
       <div class="panel-collapse collapse" id="collapse1">
         <div class="panel-body">
           <label for="trainName">Train Name</label>
-          <input type="text" name="trainName" class="form-control" id="trainName">
+          <input type="text" name="trainName" class="form-control" id="trainName" >
           <label for="destination">Destination</label>
-          <input type="text" name="destination" class="form-control">
+          <input type="text" name="destination" class="form-control" id="dest" >
           <label for="fTrainTime">First Train Time</label>
-          <input type="text" name="fTrainTime" class="form-control">
+          <input type="text" name="fTrainTime" class="form-control" id="fTrainTime" >
           <label for="frequency">Frequency (min)</label>
-          <input type="text" name="frequency" class="form-control">
+          <input type="text" name="frequency" class="form-control" id="frequency" >
         </div>
         <div class="panel-footer">
           <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
@@ -61,7 +63,7 @@
             <tr>
               <td>NoData</td>
               <td>NoData</td>
-              <td>NoData</td>
+              <td>NoData</td
             </tr>
           </tbody>
         </table>
