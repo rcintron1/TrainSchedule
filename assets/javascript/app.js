@@ -27,10 +27,14 @@ function appendTable(keys) {
   tddst = $("<td>").append(keys["ds"]);
   tdftt = $("<td>").append(keys["ft"]);
   tdfrq = $("<td>").append(keys["fq"]);
-  tr = $("<tr>").attr("key", keys["key"]);
-  tr.append(tdtn, tddst, tdftt, tdfrq);
+  tdrem = $("<td>");
+  btn = $("<button>").html("x").attr("key",keys["key"]).addClass("btnRemRow");
+  tdrem.append(btn);
+  tr = $("<tr>").attr("id", keys["key"]);
+  tr.append(tdtn, tddst, tdftt, tdfrq, tdrem);
   $("#tbody").append(tr);
 }
+
 $(document).ready(function() {
   //add eventhandlers for fillOutForm buttons
   $("#btnSubmit").on("click", function() {
@@ -39,6 +43,14 @@ $(document).ready(function() {
     var fTTime = $("#fTrainTime").val();
     var freq = $("#frequency").val();
     writeUserData(tname, dest, fTTime, freq);
+  });
+
+  $(document).on("click",".btnRemRow",function(){
+    event.preventDefault();
+    var id = $(this).attr("key");
+    console.log(id);
+    database.ref(id).remove();
+    $("#" + id).remove();
   });
 });
 
