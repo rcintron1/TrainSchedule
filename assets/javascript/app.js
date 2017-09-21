@@ -28,7 +28,7 @@ function appendTable(keys) {
   tdftt = $("<td>").append(keys["ft"]);
   tdfrq = $("<td>").append(keys["fq"]);
   tdrem = $("<td>");
-  btn = $("<button>").html("x").attr("key",keys["key"]).addClass("btnRemRow");
+  btn = $("<button>").html(keys["key"]).attr("key",keys["key"]).addClass("btnRemRow");
   tdrem.append(btn);
   tr = $("<tr>").attr("id", keys["key"]);
   tr.append(tdtn, tddst, tdftt, tdfrq, tdrem);
@@ -48,9 +48,8 @@ $(document).ready(function() {
   $(document).on("click",".btnRemRow",function(){
     event.preventDefault();
     var id = $(this).attr("key");
-    console.log(id);
     database.ref(id).remove();
-    $("#" + id).remove();
+    // $("#" + id).remove();
   });
 });
 
@@ -63,4 +62,9 @@ database.ref().on("child_added", function(snapshot) {
   key["fq"] = snapshot.val().frequency;
   key["key"] = snapshot.key;
   appendTable(key);
+});
+database.ref().on("child_removed", function(snapshot){
+  console.log(snapshot.key);
+  id = snapshot.key;
+  $("#" + id).remove();
 });
