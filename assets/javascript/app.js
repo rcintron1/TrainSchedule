@@ -13,7 +13,7 @@ var database = firebase.database();
 
 //add data to DB
 function writeUserData(trainName, destination, firstTrainTime, frequency) {
-  console.log([trainName,destination,firstTrainTime,frequency]);
+  console.log([trainName, destination, firstTrainTime, frequency]);
   firebase.database().ref().push({
     trainName: trainName,
     destination: destination,
@@ -21,13 +21,14 @@ function writeUserData(trainName, destination, firstTrainTime, frequency) {
     frequency: frequency
   });
 }
-function appendTable(keys){
-  tdtn= $("<td>").append(keys["tn"]);
-  tddst= $("<td>").append(keys["ds"]);
+
+function appendTable(keys) {
+  tdtn = $("<td>").append(keys["tn"]);
+  tddst = $("<td>").append(keys["ds"]);
   tdftt = $("<td>").append(keys["ft"]);
   tdfrq = $("<td>").append(keys["fq"]);
-  tr = $("<tr>").attr("key",keys["key"]);
-  tr.append(tdtn,tddst,tdftt,tdfrq);
+  tr = $("<tr>").attr("key", keys["key"]);
+  tr.append(tdtn, tddst, tdftt, tdfrq);
   $("#tbody").append(tr);
 }
 $(document).ready(function() {
@@ -37,17 +38,17 @@ $(document).ready(function() {
     var dest = $("#dest").val();
     var fTTime = $("#fTrainTime").val();
     var freq = $("#frequency").val();
-    writeUserData(tname,dest,fTTime,freq);
+    writeUserData(tname, dest, fTTime, freq);
   });
 });
 
 database.ref().on("child_added", function(snapshot) {
-      console.log(snapshot);
-      var key = {};
-      key["tn"] = snapshot.val().trainName;
-      key["ds"] = snapshot.val().destination;
-      key["ft"] = snapshot.val().firstTrainTime;
-      key["fq"] = snapshot.val().frequency;
-      key["key"] = snapshot.key;
-      appendTable(key);
+  console.log(snapshot);
+  var key = {};
+  key["tn"] = snapshot.val().trainName;
+  key["ds"] = snapshot.val().destination;
+  key["ft"] = snapshot.val().firstTrainTime;
+  key["fq"] = snapshot.val().frequency;
+  key["key"] = snapshot.key;
+  appendTable(key);
 });
