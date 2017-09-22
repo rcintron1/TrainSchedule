@@ -28,7 +28,7 @@ function appendTable(keys) {
   tdftt = $("<td>").append(keys["ft"]);
   tdfrq = $("<td>").append(keys["fq"]);
   tdrem = $("<td>");
-  btn = $("<button>").html(keys["key"]).attr("key",keys["key"]).addClass("btnRemRow");
+  btn = $("<button>").html("x").attr("key",keys["key"]).addClass("btnRemRow");
   tdrem.append(btn);
   tr = $("<tr>").attr("id", keys["key"]);
   tr.append(tdtn, tddst, tdftt, tdfrq, tdrem);
