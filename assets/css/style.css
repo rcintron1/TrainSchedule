@@ -7,7 +7,10 @@ body {
   color: white;
 }
 
-.jumbotron {
+.jumbotron{
   background-color: #5ba;
+
+}
+.jumbotron h1{
   font-family: 'Libre Barcode 128 Text', cursive;
 }
