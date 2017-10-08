@@ -27,11 +27,12 @@ function appendTable(keys) {
   tddst = $("<td>").append(keys["ds"]);
   tdftt = $("<td>").append(moment(keys["ft"], 'HH:mm').format('hh:mm a'));
   tdfrq = $("<td>").append(keys["fq"]);
+  tdnt = $("<td>").append(moment(nextTrain(keys["fq"],keys["ft"]),"HH:mm").format("hh:mm a"));
   tdrem = $("<td>");
   btn = $("<button>").html("x").attr("key", keys["key"]).addClass("btnRemRow");
   tdrem.append(btn);
   tr = $("<tr>").attr("id", keys["key"]);
-  tr.append(tdtn, tddst, tdftt, tdfrq, tdrem);
+  tr.append(tdtn, tddst, tdftt, tdfrq, tdnt, tdrem);
   $("#tbody").append(tr);
 }
 
@@ -53,6 +54,15 @@ $(document).ready(function() {
   });
 });
 
+function nextTrain(interval,startTime){
+  var time = moment(startTime,"HH:mm").format("HH:mm");
+  var tnow = moment(moment.now()).format("HH:mm");
+  if (time < tnow){
+    var nt = moment(time,"HH:mm").add(interval,"m").format("HH:mm");
+    return nextTrain(interval, nt);
+  }
+  return time;
+}
 database.ref().on("child_added", function(snapshot) {
   console.log(snapshot);
   var key = {};
